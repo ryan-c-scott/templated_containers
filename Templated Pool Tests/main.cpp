@@ -1,18 +1,41 @@
-//
-//  main.cpp
-//  Templated Pool Tests
-//
-//  Created by Ryan Scott on 1/16/13.
-//  Copyright (c) 2013 Ryan Scott. All rights reserved.
-//
-
 #include <iostream>
 
-int main(int argc, const char * argv[])
-{
+#include "PackedPool.h"
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+using namespace Data;
+
+template< class T >
+void PrintPool( PackedPool< T > pool )
+{
+    for( typename PackedPool< T >::iterator iter = pool.begin(); iter != pool.end(); ++iter ) {
+        std::cout<< ": " << *iter << std::endl;
+    }
+}
+
+int main( int argc, const char * argv[] )
+{
+    typedef PackedPool< int > ThisPoolType;
+
+    ThisPoolType muhPool;
+
+    //PrintPool< PackedPool< int > >( muhPool );
+
+    for( int i = 0; i < 10; ++i ) {
+        muhPool.Add( i );
+    }
+
+    muhPool.Remove( 0 );
+    muhPool.Remove( 3 );
+    muhPool.Remove( 6 );
+    muhPool.Remove( 0 );
+
+    muhPool.Remove( 0 );
+
+    for( typename ThisPoolType::iterator iter = muhPool.begin(); iter != muhPool.end(); ++iter ) {
+        std::cout<< ": " << *iter << std::endl;
+    }
+
+
     return 0;
 }
 
