@@ -31,7 +31,7 @@ int main( int argc, const char * argv[] )
 
     muhPool.Remove( 0 );
 
-    for( typename ThisPoolType::iterator iter = muhPool.begin(); iter != muhPool.end(); ++iter ) {
+    for( ThisPoolType::iterator iter = muhPool.begin(); iter != muhPool.end(); ++iter ) {
         std::cout<< ": " << *iter << std::endl;
     }
 

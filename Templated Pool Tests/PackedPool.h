@@ -14,41 +14,35 @@ namespace Data
     template < typename T >
         class PackedPool
     {
-        typedef std::vector< T > PoolType;
-        PoolType mPool;
+        std::vector< T > mPool;
     
     public:
-    
-    PackedPool() {}
 
-        typedef typename PoolType::iterator iterator;
-        
+        typedef typename std::vector< T >::iterator iterator;
+
+        PackedPool() {}
+
         void Add( T val )
         {
-            // Push and increment head
             mPool.push_back( val );
         }
 
-        typename PoolType::iterator Remove( unsigned idx )
+        iterator Remove( unsigned idx )
         {
             // Just a wrapper to erase that uses an index
             return Erase( mPool.begin() + idx );
         }
 
-        typename PoolType::iterator Erase( typename PoolType::iterator iter )
+        iterator Erase( iterator iter )
         {
-            // Copy head to this iter and decrement head
-
-            // Need to check that this isn't the last element
-
             *iter = *( mPool.end() - 1 );
             mPool.pop_back();
 
             return iter; // because of the copy there's no shift and the same iterator should be valid.
         }
-        
-        typename PoolType::iterator begin() { return mPool.begin(); }
-        typename PoolType::iterator end() { return mPool.end(); }
+
+        iterator begin() { return mPool.begin(); }
+        iterator end() { return mPool.end(); }
 
     };
 
