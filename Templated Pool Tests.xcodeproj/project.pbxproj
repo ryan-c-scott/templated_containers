@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B68156516C6246D0075AD8B /* HandledPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandledPool.h; sourceTree = "<group>"; };
 		4BF779EB16A7178C0004E2CD /* Templated Pool Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Templated Pool Tests"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF779EF16A7178C0004E2CD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4BF779F116A7178C0004E2CD /* Templated_Pool_Tests.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Templated_Pool_Tests.1; sourceTree = "<group>"; };
@@ -61,6 +62,7 @@
 		4BF779EE16A7178C0004E2CD /* Templated Pool Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4B68156516C6246D0075AD8B /* HandledPool.h */,
 				4BF779EF16A7178C0004E2CD /* main.cpp */,
 				4BF779F116A7178C0004E2CD /* Templated_Pool_Tests.1 */,
 				4BF779F816A71B3B0004E2CD /* PackedPool.h */,
@@ -210,6 +212,7 @@
 				4BF779F716A7178C0004E2CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
