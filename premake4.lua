@@ -12,7 +12,7 @@ configuration "Release"
 flags { "OptimizeSpeed", "Symbols" }
 
 ------------------------------------------------------------------------------------
-project "VL"
+project "Tests"
 kind "ConsoleApp"
 language "C++"
 

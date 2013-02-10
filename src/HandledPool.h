@@ -11,27 +11,30 @@ namespace Data
     {
         std::vector< T* > mPool;
         std::vector< unsigned > mFreeList;
+        unsigned mSize;
     
     public:
 
         // Note: An initial capacity would be nice
-        HandledPool() {}
+    HandledPool() : mSize( 0 ) {}
 
-        void Add( T *val )
+        unsigned Add( T *val )
         {
             if( mFreeList.empty() ) {
                 mPool.push_back( val );
+                return mSize++;
             }
             else {
                 unsigned freeSlot = mFreeList.back();
                 mFreeList.pop_back();
                 mPool[ freeSlot ] = val;
+                return freeSlot;
             }
         }
 
         bool ValidHandle( unsigned handle )
         {
-            return handle > mPool.begin() && handle < mPool.end() && mPool[ handle ] != NULL;
+            return handle < mSize && mPool[ handle ] != NULL;
         }
 
         T* ResolveHandle( unsigned handle )
@@ -49,6 +52,7 @@ namespace Data
             if( ValidHandle( handle ) ) {
                 ret = mPool[ handle ];
                 mPool[ handle ] = NULL;
+                mFreeList.push_back( handle );
             }
 
             return ret;
