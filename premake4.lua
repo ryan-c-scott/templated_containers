@@ -20,10 +20,12 @@ targetdir( "bin" );
 
 files { 
    "src/**.h", "src/**.cpp", "src/**.cc",
+   "deps/EASTL/src/**.h", "deps/EASTL/src/**.cpp", 
 }
 
 includedirs { 
    "src",
+   "deps/EASTL/include"
 }
 
 links { 

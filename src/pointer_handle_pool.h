@@ -67,7 +67,7 @@ namespace Data
         unsigned FindHandle( T *objectPtr )
         {
             int i = 0;
-            for( eastl::vector< T* >::iterator it = mPool.begin(); it != mPool.end(); ++i, ++it ) {
+            for( typename eastl::vector< T* >::iterator it = mPool.begin(); it != mPool.end(); ++i, ++it ) {
                 if( *it == objectPtr )
                     return i;
             }

@@ -1,7 +1,7 @@
-#ifndef Templated_Pool_Tests_PackedPool_h
-#define Templated_Pool_Tests_PackedPool_h
+#ifndef DATA_PACKED_POOL_H
+#define DATA_PACKED_POOL_H
 
-#include <vector>
+#include <EASTL/vector.h>
 
 namespace Data
 {
@@ -14,11 +14,11 @@ namespace Data
     template < typename T >
         class PackedPool
     {
-        std::vector< T > mPool;
+        eastl::vector< T > mPool;
     
     public:
 
-        typedef typename std::vector< T >::iterator iterator;
+        typedef typename eastl::vector< T >::iterator iterator;
 
         PackedPool() {}
 
