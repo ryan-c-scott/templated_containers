@@ -1,22 +1,22 @@
-#ifndef Templated_Pool_Tests_HandledPool_h
-#define Templated_Pool_Tests_HandledPool_h
+#ifndef DATA_POINTER_HANDLE_POOL_H
+#define DATA_POINTER_HANDLE_POOL_H
 
-#include <vector>
+#include <EASTL/vector.h>
 
 namespace Data
 {
 
     template < typename T >
-        class HandledPool
+        class PointerHandlePool
     {
-        std::vector< T* > mPool;
-        std::vector< unsigned > mFreeList;
+        eastl::vector< T* > mPool;
+        eastl::vector< unsigned > mFreeList;
         unsigned mSize;
     
     public:
 
         // Note: An initial capacity would be nice
-    HandledPool() : mSize( 0 ) {}
+    PointerHandlePool() : mSize( 0 ) {}
 
         unsigned Add( T *val )
         {
@@ -56,6 +56,23 @@ namespace Data
             }
 
             return ret;
+        }
+
+        void Clear()
+        {
+            mSize = 0;
+            mPool.clear();
+        }
+
+        unsigned FindHandle( T *objectPtr )
+        {
+            int i = 0;
+            for( eastl::vector< T* >::iterator it = mPool.begin(); it != mPool.end(); ++i, ++it ) {
+                if( *it == objectPtr )
+                    return i;
+            }
+
+            return 0;
         }
 
     };
