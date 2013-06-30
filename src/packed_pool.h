@@ -1,5 +1,4 @@
-#ifndef DATA_PACKED_POOL_H
-#define DATA_PACKED_POOL_H
+#pragma once
 
 #include <EASTL/vector.h>
 
@@ -14,7 +13,7 @@ namespace Data
     template < typename T >
         class PackedPool
     {
-        eastl::vector< T > mPool;
+        eastl::vector< T > _pool;
     
     public:
 
@@ -24,28 +23,27 @@ namespace Data
 
         void Add( T val )
         {
-            mPool.push_back( val );
+            _pool.push_back( val );
         }
 
         iterator Remove( unsigned idx )
         {
             // Just a wrapper to erase that uses an index
-            return Erase( mPool.begin() + idx );
+            return Erase( _pool.begin() + idx );
         }
 
         iterator Erase( iterator iter )
         {
-            *iter = *( mPool.end() - 1 );
-            mPool.pop_back();
+            *iter = *( _pool.end() - 1 );
+            _pool.pop_back();
 
             return iter; // because of the copy there's no shift and the same iterator should be valid.
         }
 
-        iterator begin() { return mPool.begin(); }
-        iterator end() { return mPool.end(); }
+        iterator begin() { return _pool.begin(); }
+        iterator end() { return _pool.end(); }
 
     };
 
 } // end namespace
 
-#endif

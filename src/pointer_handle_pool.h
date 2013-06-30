@@ -1,5 +1,4 @@
-#ifndef DATA_POINTER_HANDLE_POOL_H
-#define DATA_POINTER_HANDLE_POOL_H
+#pragma once
 
 #include <EASTL/vector.h>
 
@@ -9,38 +8,38 @@ namespace Data
     template < typename T >
         class PointerHandlePool
     {
-        eastl::vector< T* > mPool;
-        eastl::vector< unsigned > mFreeList;
-        unsigned mSize;
+        eastl::vector< T* > _pool;
+        eastl::vector< unsigned > _freeList;
+        unsigned _size;
     
     public:
 
         // Note: An initial capacity would be nice
-    PointerHandlePool() : mSize( 0 ) {}
+    PointerHandlePool() : _size( 0 ) {}
 
         unsigned Add( T *val )
         {
-            if( mFreeList.empty() ) {
-                mPool.push_back( val );
-                return mSize++;
+            if( _freeList.empty() ) {
+                _pool.push_back( val );
+                return _size++;
             }
             else {
-                unsigned freeSlot = mFreeList.back();
-                mFreeList.pop_back();
-                mPool[ freeSlot ] = val;
+                unsigned freeSlot = _freeList.back();
+                _freeList.pop_back();
+                _pool[ freeSlot ] = val;
                 return freeSlot;
             }
         }
 
         bool ValidHandle( unsigned handle )
         {
-            return handle < mSize && mPool[ handle ] != NULL;
+            return handle < _size && _pool[ handle ] != NULL;
         }
 
         T* ResolveHandle( unsigned handle )
         {
             if( ValidHandle( handle ) )
-                return mPool[ handle ];
+                return _pool[ handle ];
 
             return NULL;
         }
@@ -50,9 +49,9 @@ namespace Data
             T* ret = NULL;
 
             if( ValidHandle( handle ) ) {
-                ret = mPool[ handle ];
-                mPool[ handle ] = NULL;
-                mFreeList.push_back( handle );
+                ret = _pool[ handle ];
+                _pool[ handle ] = NULL;
+                _freeList.push_back( handle );
             }
 
             return ret;
@@ -60,14 +59,14 @@ namespace Data
 
         void Clear()
         {
-            mSize = 0;
-            mPool.clear();
+            _size = 0;
+            _pool.clear();
         }
 
         unsigned FindHandle( T *objectPtr )
         {
             int i = 0;
-            for( typename eastl::vector< T* >::iterator it = mPool.begin(); it != mPool.end(); ++i, ++it ) {
+            for( typename eastl::vector< T* >::iterator it = _pool.begin(); it != _pool.end(); ++i, ++it ) {
                 if( *it == objectPtr )
                     return i;
             }
@@ -79,4 +78,3 @@ namespace Data
 
 } // end namespace
 
-#endif
